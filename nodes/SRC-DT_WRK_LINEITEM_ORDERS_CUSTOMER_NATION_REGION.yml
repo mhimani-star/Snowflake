@@ -1,0 +1,90 @@
+fileVersion: 1
+id: ed4ee656-1050-4308-a2bc-68d119389c81
+name: DT_WRK_LINEITEM_ORDERS_CUSTOMER_NATION_REGION
+operation:
+  config:
+    baseLocation: ""
+    clusterKey: false
+    clusterKeyConfig:
+      items:
+        - {}
+    clusterKeyConfigExpressions:
+      items:
+        - {}
+    clusterKeyExpressions: false
+    downstreamOption: false
+    externalVolume: ""
+    groupByAll: true
+    initialize: ON_CREATE
+    insertStrategy: UNION ALL
+    lagSpecification:
+      items:
+        - lagPeriod: Minutes
+          lagValue: "5"
+    refresh_mode: AUTO
+    selectDistinct: false
+    warehouseName: dev_wh_xs
+  database: ""
+  deployEnabled: true
+  description: ""
+  isMultisource: false
+  locationName: SRC
+  materializationType: dynamic table
+  metadata:
+    appliedNodeTests: []
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 527b94bd-b5da-4e9e-ba6e-e139cfd73979
+          stepCounter: ed4ee656-1050-4308-a2bc-68d119389c81
+        config: {}
+        dataType: VARCHAR(25)
+        description: ""
+        name: C_NAME
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 7cbc863c-9d73-4097-9f40-eaf8c516f8d8
+                stepCounter: ca2a641b-5e14-4c55-8a71-b128ea9526f3
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 9315e8c1-a72a-46fd-8078-696af4565d8e
+          stepCounter: ed4ee656-1050-4308-a2bc-68d119389c81
+        config: {}
+        dataType: NUMBER(12,2)
+        description: ""
+        name: L_QUANTITY
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: bd36c1cb-73b7-485b-9a2d-4574e8b2bba7
+                stepCounter: ba6aed90-d4c6-4724-bd16-a50d5e3cac70
+            transform: SUM("DT_WRK_LINEITEM_ORDERS"."L_QUANTITY")
+    cteString: ""
+    enabledColumnTestIDs: []
+    sourceMapping:
+      - aliases:
+          DT_WRK_CUSTOMER_NATION_REGION: ca2a641b-5e14-4c55-8a71-b128ea9526f3
+          DT_WRK_LINEITEM_ORDERS: ba6aed90-d4c6-4724-bd16-a50d5e3cac70
+        customSQL:
+          customSQL: ""
+        dependencies:
+          - locationName: SRC
+            nodeName: DT_WRK_CUSTOMER_NATION_REGION
+          - locationName: SRC
+            nodeName: DT_WRK_LINEITEM_ORDERS
+        join:
+          joinCondition: |-
+            FROM {{ ref('SRC', 'DT_WRK_LINEITEM_ORDERS') }} "DT_WRK_LINEITEM_ORDERS"
+            INNER JOIN {{ ref('SRC', 'DT_WRK_CUSTOMER_NATION_REGION') }} "DT_WRK_CUSTOMER_NATION_REGION"
+            ON "DT_WRK_LINEITEM_ORDERS"."O_CUSTKEY" = "DT_WRK_CUSTOMER_NATION_REGION"."C_CUSTKEY"
+        name: DT_WRK_LINEITEM_ORDERS_CUSTOMER_NATION_REGION
+        noLinkRefs: []
+  name: DT_WRK_LINEITEM_ORDERS_CUSTOMER_NATION_REGION
+  overrideSQL: false
+  schema: ""
+  sqlType: Dynamic-tables:::347
+  type: sql
+  version: 1
+type: Node
