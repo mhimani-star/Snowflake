@@ -1,0 +1,11 @@
+fileVersion: 1
+id: "9"
+mappingDefinitions:
+  SRC:
+    database: HIMANI_PROD
+    schema: SOURCE_DATA
+  WORK:
+    database: HIMANI_PROD
+    schema: PUBLIC
+name: PROD
+type: Environment

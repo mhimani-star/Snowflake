@@ -1,0 +1,11 @@
+fileVersion: 1
+id: "8"
+mappingDefinitions:
+  SRC:
+    database: HIMANI_QA
+    schema: SOURCE_DATA
+  WORK:
+    database: HIMANI_QA
+    schema: REPORTING
+name: QA
+type: Environment
